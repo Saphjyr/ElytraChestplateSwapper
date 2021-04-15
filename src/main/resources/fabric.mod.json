@@ -16,7 +16,7 @@
   "license": "CC0-1.0",
   "icon": "assets/ecs/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "com.saphjyr.ElytraChestplateSwapper.ElytraChestplateSwapper"

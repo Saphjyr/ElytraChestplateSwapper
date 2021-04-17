@@ -1,7 +1,6 @@
 package com.saphjyr.ElytraChestplateSwapper;
 
-import org.lwjgl.glfw.GLFW;
-
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.InputUtil.Key;
@@ -15,14 +14,15 @@ public class SwapKeyBinding extends KeyBinding {
 
     private boolean pressedBypass;
 
-    public SwapKeyBinding() {
+    public SwapKeyBinding(String translationKey, int defaultkey, String category) {
         super(
-            "key.ecs.swap", // The translation key of the keybinding's name
+            translationKey, // The translation key of the keybinding's name
             InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-            GLFW.GLFW_KEY_GRAVE_ACCENT, // The keycode of the key
-            "category.ecs" // The translation key of the keybinding's category.
+            defaultkey, // The keycode of the key
+            category // The translation key of the keybinding's category.
         );
         key = this.getDefaultKey();
+        pressedBypass = false;
     }
 
 
@@ -42,6 +42,7 @@ public class SwapKeyBinding extends KeyBinding {
 
     public void setPressedBypass(boolean pressed) {
         pressedBypass = pressed;
+        if (pressed) InventoryUtils.swapChestplate(MinecraftClient.getInstance());
     }
     
 }

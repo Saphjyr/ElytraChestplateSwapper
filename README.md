@@ -1,9 +1,14 @@
-# Fabric Example Mod
+# Elytra/Chestplate Swapper
 
-## Setup
+## Description
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+A simple quality of life mod that swaps between chestplate and elytra on a keystroke. 
+The default key is "grave accent" ("²" on the AZERTY layout) but it can be changed in the options of the game.
 
-## License
+## Requirements
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This mod requires the Fabric API
+
+## Disclamer
+
+Some public servers do not allow this kind of mods and can detect them if you use it badly (spam the key, swap while pressing a deplacement key). You should check the server's rule before using it on a public server. I am not responsible for the consequences of inapropriate use of this mod.

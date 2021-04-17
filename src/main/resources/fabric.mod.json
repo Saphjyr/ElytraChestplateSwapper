@@ -19,14 +19,13 @@
   "environment": "client",
   "entrypoints": {
     "main": [
-      "com.saphjyr.ElytraChestplateSwapper.ElytraChestplateSwapper"
     ],
     "client":[
       "com.saphjyr.ElytraChestplateSwapper.ElytraChestplateSwapperClient"
     ]
   },
   "mixins": [
-
+    "ecs.mixins.json"
   ],
 
   "depends": {

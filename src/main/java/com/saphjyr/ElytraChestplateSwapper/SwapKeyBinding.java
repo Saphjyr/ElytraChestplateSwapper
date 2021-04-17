@@ -1,6 +1,8 @@
 package com.saphjyr.ElytraChestplateSwapper;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.InputUtil.Key;
@@ -36,13 +38,29 @@ public class SwapKeyBinding extends KeyBinding {
         return key;
     }
 
+    @Override
+	public void setPressed(boolean pressed) {
+		super.setPressed(pressed);
+		if(pressed) onPressed();
+	}
+
+    public void onPressed() {
+        InventoryUtils.swapChestplate(MinecraftClient.getInstance());
+    }
+
     public boolean isPressedBypass() {
         return pressedBypass;
     }
 
     public void setPressedBypass(boolean pressed) {
         pressedBypass = pressed;
-        if (pressed) InventoryUtils.swapChestplate(MinecraftClient.getInstance());
+        if (pressed) onPressBypass();
+    }
+
+    public void onPressBypass() {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.currentScreen instanceof InventoryScreen || client.currentScreen instanceof CreativeInventoryScreen)
+            InventoryUtils.swapChestplate(client);
     }
     
 }

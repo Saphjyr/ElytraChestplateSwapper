@@ -2,8 +2,12 @@
 
 ## Description
 
-A simple quality of life mod that swaps between chestplate and elytra on a keystroke. 
-The default key is "grave accent" ("²" on the AZERTY layout) but it can be changed in the options of the game.
+A simple quality of life mod that swaps between chestplate and elytra on a keystroke.
+
+## How to use it
+
+The default key is "grave accent" ("²" on the AZERTY layout) but it can be changed in the options of the game.  
+It can be triggered outside of the inventory and inside too. 
 
 ## Requirements
 

@@ -5,25 +5,25 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.c2s.play.ClickSlotC2SPacket;
 import net.minecraft.screen.slot.SlotActionType;
 
 public class InventoryUtils {
     public static void swapChestplate(MinecraftClient client){
-                
+
         // Slots to swap to
         int elytraSlot = -1;
         int chestplateSlot = -1;
 
-        // List inventory slots
-        int[] range = new int[36];
+        // List inventory slots, in a special order so the selected slot is the most top-left chestplate
+        int[] range = new int[37];
         for (int i = 0; i<9; i++) range[i] = 8-i;
         for (int i = 9; i<36; i++) range[i] = 35-(i-9);
+        range[36] = 40; // Off hand
 
         // Find elytraSlot and chestplateSlot
         for(int slot : range) {
 
-            ItemStack stack = client.player.inventory.getStack(slot);
+            ItemStack stack = client.player.getInventory().getStack(slot);
             
             if(stack.isEmpty() || !(stack.getItem() instanceof ArmorItem || stack.getItem() instanceof ElytraItem))
                 continue;
@@ -39,7 +39,7 @@ public class InventoryUtils {
         }
 
         // Swap with slot depending on currently weard item
-        ItemStack wearedItemStack =  client.player.inventory.getStack(38);
+        ItemStack wearedItemStack =  client.player.getInventory().getStack(38);
         if (wearedItemStack.isEmpty() && elytraSlot >= 0) {
             swap(elytraSlot, client);
         }
@@ -54,18 +54,17 @@ public class InventoryUtils {
 
     private static void swap(int slot, MinecraftClient client) {
         int slot2 = slot;
-        if(slot2 < 9) slot2 += 36;
+        if (slot2 == 40) slot2 = 45; // Off Hand offset
+        if(slot2 < 9) slot2 += 36;   // Toolbar offset
+        
 
         // Take the item to swap to
-        ClickSlotC2SPacket packet1 = new ClickSlotC2SPacket(0, slot2, 0, SlotActionType.PICKUP, client.player.inventory.getStack(slot), (short)0);
-        client.getNetworkHandler().sendPacket(packet1);
+        client.interactionManager.clickSlot(0, slot2, 0, SlotActionType.PICKUP, client.player);
 
         // Put it in the armor slot
-        ClickSlotC2SPacket packet2 = new ClickSlotC2SPacket(0, 6, 0, SlotActionType.PICKUP, client.player.inventory.getStack(38), (short)0);
-        client.getNetworkHandler().sendPacket(packet2);
+        client.interactionManager.clickSlot(0, 6, 0, SlotActionType.PICKUP, client.player);
 
         // Put back what was in the armor slot (can be air)
-        ClickSlotC2SPacket packet3 = new ClickSlotC2SPacket(0, slot2, 0, SlotActionType.PICKUP, client.player.inventory.getStack(slot), (short)0);
-        client.getNetworkHandler().sendPacket(packet3);
+        client.interactionManager.clickSlot(0, slot2, 0, SlotActionType.PICKUP, client.player);
     }
 }

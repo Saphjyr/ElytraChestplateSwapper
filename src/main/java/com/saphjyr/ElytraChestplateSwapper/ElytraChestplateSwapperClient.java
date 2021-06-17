@@ -15,6 +15,7 @@ public class ElytraChestplateSwapperClient implements ClientModInitializer {
         // Create and log the key binding
         keyBinding = new SwapKeyBinding("key.ecs.swap", GLFW.GLFW_KEY_GRAVE_ACCENT, "category.ecs");
         KeyBindingHelper.registerKeyBinding(keyBinding);
+        
     }
 
     

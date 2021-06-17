@@ -3,7 +3,7 @@ package com.saphjyr.ElytraChestplateSwapper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.util.InputUtil.Key;
 
@@ -59,8 +59,20 @@ public class SwapKeyBinding extends KeyBinding {
 
     public void onPressBypass() {
         MinecraftClient client = MinecraftClient.getInstance();
-        if (client.currentScreen instanceof InventoryScreen || client.currentScreen instanceof CreativeInventoryScreen)
+        
+        // If the the inventory screen, trigger swap
+        if (client.currentScreen instanceof InventoryScreen){
             InventoryUtils.swapChestplate(client);
+        }
+
+        // If in the creative screen, only trigger when in the inventory tab
+        if (client.currentScreen instanceof CreativeInventoryScreen) {
+            CreativeInventoryScreen cis = (CreativeInventoryScreen)client.currentScreen;
+            if(cis.getSelectedTab() == 11) {
+                InventoryUtils.swapChestplate(client);
+            }
+        }
+            
     }
     
 }

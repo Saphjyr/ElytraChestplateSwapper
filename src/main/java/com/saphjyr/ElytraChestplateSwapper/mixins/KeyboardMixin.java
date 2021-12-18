@@ -24,6 +24,7 @@ public class KeyboardMixin {
             // Update the pressedBypass state of the SwapKeyBinding
             boolean pressed = ElytraChestplateSwapperClient.keyBinding.isPressedBypass();
             ElytraChestplateSwapperClient.keyBinding.setPressedBypass(!pressed);
+            
      
         }
 	}

@@ -58,19 +58,27 @@ public class SwapKeyBinding extends KeyBinding {
     }
 
     public void onPressBypass() {
-        MinecraftClient client = MinecraftClient.getInstance();
-        
-        // If the the inventory screen, trigger swap
-        if (client.currentScreen instanceof InventoryScreen) {
-            InventoryUtils.swapChestplate(client);
-        }
 
-        // If in the creative screen, only trigger when in the inventory tab
-        if (client.currentScreen instanceof CreativeInventoryScreen cis) {
-            if (cis.isInventoryTabSelected()) {
+        try {
+            MinecraftClient client = MinecraftClient.getInstance();
+        
+            // If the the inventory screen, trigger swap
+            if (client.currentScreen instanceof InventoryScreen) {
                 InventoryUtils.swapChestplate(client);
             }
+
+            //If in the creative screen, only trigger when in the inventory tab
+            if (client.currentScreen instanceof CreativeInventoryScreen) {
+                CreativeInventoryScreen cis = (CreativeInventoryScreen)client.currentScreen;
+                if(cis.isInventoryTabSelected()) {
+                    InventoryUtils.swapChestplate(client);
+                }
+            }
+            
+        } catch (Exception e) {
+            System.out.println("ECS creative inventory swapping is not compatible with this version of Minecraft");
         }
+        
             
     }
     

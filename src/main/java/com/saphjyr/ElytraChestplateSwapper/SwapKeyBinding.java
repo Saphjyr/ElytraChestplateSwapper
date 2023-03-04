@@ -61,14 +61,13 @@ public class SwapKeyBinding extends KeyBinding {
         MinecraftClient client = MinecraftClient.getInstance();
         
         // If the the inventory screen, trigger swap
-        if (client.currentScreen instanceof InventoryScreen){
+        if (client.currentScreen instanceof InventoryScreen) {
             InventoryUtils.swapChestplate(client);
         }
 
         // If in the creative screen, only trigger when in the inventory tab
-        if (client.currentScreen instanceof CreativeInventoryScreen) {
-            CreativeInventoryScreen cis = (CreativeInventoryScreen)client.currentScreen;
-            if(cis.getSelectedTab() == 11) {
+        if (client.currentScreen instanceof CreativeInventoryScreen cis) {
+            if (cis.isInventoryTabSelected()) {
                 InventoryUtils.swapChestplate(client);
             }
         }

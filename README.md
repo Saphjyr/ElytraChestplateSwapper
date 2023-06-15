@@ -1,5 +1,7 @@
 # Elytra/Chestplate Swapper
 
+The built mod can be found [on Curseforge](https://www.curseforge.com/minecraft/mc-mods/elytra-chestplate-swapper)
+
 ## Description
 
 A simple quality of life mod that swaps between chestplate and elytra on a keystroke.

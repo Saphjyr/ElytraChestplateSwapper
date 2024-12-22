@@ -2,14 +2,12 @@ package com.saphjyr.ElytraChestplateSwapper;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.screen.slot.SlotActionType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.entity.event.v1.FabricElytraItem;
 
 public class InventoryUtils {
 
@@ -90,14 +88,13 @@ public class InventoryUtils {
     }
 
     private static boolean isElytra(ItemStack stack) {
-        return stack.getItem() instanceof ElytraItem || stack.getItem() instanceof FabricElytraItem;
+        return stack.getItem() == Items.ELYTRA;
     }
 
     private static boolean isChestplate(ItemStack stack) {
         boolean isChestplate = false;
         if (stack.getItem() instanceof ArmorItem) {
-            ArmorItem armorItem = (ArmorItem)stack.getItem();
-            if (armorItem.getSlotType() == EquipmentSlot.CHEST) {
+            if (stack.getItem().getDefaultStack().getName().getString().toLowerCase().contains("chestplate")) {
                 isChestplate = true;
             }
         }

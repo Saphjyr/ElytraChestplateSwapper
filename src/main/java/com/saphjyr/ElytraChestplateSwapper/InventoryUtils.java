@@ -94,7 +94,7 @@ public class InventoryUtils {
     private static boolean isChestplate(ItemStack stack) {
         boolean isChestplate = false;
         if (stack.getItem() instanceof ArmorItem) {
-            if (stack.getItem().getDefaultStack().getName().getString().toLowerCase().contains("chestplate")) {
+            if (stack.getItem().toString().toLowerCase().contains("chestplate")) {
                 isChestplate = true;
             }
         }
